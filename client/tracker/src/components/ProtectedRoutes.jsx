@@ -10,8 +10,8 @@ const ProtectedRoutes = (props) => {
     if (!token) {
       setHasAccess(false);
       navigate("/");
-    }else{
-      setHasAccess(true)
+    } else {
+      setHasAccess(true);
     }
   }, []);
 
