@@ -24,13 +24,13 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(email=email, password=password)
+        print(user)
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
             login(request, user)
-            group = request.user.groups.all()[0].name
+            group = request.user.groups.get().name
             return Response({'token': token.key, 'group': group}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
 
 class LogoutView(APIView):
     """SignOut request"""
